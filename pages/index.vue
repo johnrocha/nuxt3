@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section id="home" class="bg-gradient-to-r from-blue-800 to-pink-600">
+    <section id="home" class="bg-gradient-to-r from-blue-950 to-blue-800">
       <div
         class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28"
       >
@@ -8,7 +8,8 @@
           <h1
             class="max-w-2xl mb-4 text-4xl font-extrabold ding-none tracking-tight md:text-5xl xl:text-6xl text-white"
           >
-            Agregando valor para<br />produtos e marcas.
+            Agregando valor para<br />produtos e marcas. (TEXTO ÍNDICE DE
+            SATISFAÇÃO)
           </h1>
           <p
             class="max-w-2xl mb-6 font-light text-white lg:mb-8 md:text-lg lg:text-xl"
@@ -54,7 +55,7 @@
       </div>
     </section>
 
-    <section class="bg-gradient-to-r from-blue-800 to-pink-600">
+    <section class="bg-gradient-to-r from-blue-950 to-blue-800">
       <div class="max-w-screen-xl px-4 pb-8 mx-auto lg:pb-16">
         <div
           class="grid grid-cols-2 gap-8 text-gray-500 sm:gap-12 sm:grid-cols-3 lg:grid-cols-4"
@@ -225,7 +226,8 @@
     </section>
 
     <section
-      class="bg-gradient-to-r from-blue-800 to-pink-600 border-gray-200 py-2.5" id="company"
+      class="bg-gradient-to-r from-blue-950 to-blue-800 border-gray-200 py-2.5"
+      id="company"
     >
       <div
         class="space-y-1 border-t border-gray-200 my-7 max-w-screen-xl px-4 py-8 mx-auto lg:space-y-20 lg:px-6"
@@ -238,10 +240,11 @@
         >
           <div class="sm:text-lg">
             <h4 class="mb-4 text-3xl font-extrabold tracking-tight">
-              TREINAMENTO
+              (TEXTO Benchmark, sobre satisfação dos clientes que geramos.)
             </h4>
             <h2 class="mb-4 text-xl font-extrabold tracking-tight">
-              INSPIRING ENGAGEMENT PLATFORM
+              (TEXTO ênfase no que diferencia a gente dos outros, tempo real,
+              orquestração de sistemas, Next Best Offer)
             </h2>
             <p class="mb-8 font-light lg:text-xl">
               O treinamento do <b>Inspiring</b> Engagement Platform (IEP),
@@ -273,7 +276,7 @@
           />
           <div class="text-white sm:text-lg">
             <h2 class="mb-4 text-3xl font-extrabold tracking-tight">
-              O QUE O IEP FAZ?
+              TEXTOS LISTA CALL TO ACTION
             </h2>
             <p class="mb-8 font-light lg:text-xl">
               Em poucas palavras podemos dizer que o IEP faz é:
@@ -432,7 +435,7 @@
       </div>
     </section>
 
-    <section class="bg-gradient-to-r from-blue-800 to-pink-600" id="feats">
+    <section class="bg-gradient-to-r from-blue-950 to-blue-800" id="feats">
       <div class="max-w-screen-xl px-4 py-8 mx-auto lg:py-24 lg:px-6">
         <div class="max-w-screen-md mx-auto mb-8 text-center lg:mb-12">
           <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-white">
@@ -522,97 +525,33 @@
       </div>
     </section>
 
-    <footer class="bg-[#262d57]">
+    <footer class="bg-[#262d57] text-center">
       <div class="max-w-screen-xl p-4 py-6 mx-auto lg:py-16 md:p-8 lg:p-10">
         <div class="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
           <div>
             <h3 class="mb-6 text-sm font-semibold text-white uppercase">
               Company
             </h3>
-            <ul class="text-white">
-              <li class="mb-4">
-                <a href="#" class="hover:underline">About</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Careers</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Brand Center</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Blog</a>
-              </li>
-            </ul>
           </div>
           <div>
             <h3 class="mb-6 text-sm font-semibold text-white uppercase">
               Help center
             </h3>
-            <ul class="text-white">
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Discord Server</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Twitter</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Contact Us</a>
-              </li>
-            </ul>
           </div>
           <div>
             <h3 class="mb-6 text-sm font-semibold text-white uppercase">
               Legal
             </h3>
-            <ul class="text-white">
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Privacy Policy</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Licensing</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Terms</a>
-              </li>
-            </ul>
           </div>
           <div>
             <h3 class="mb-6 text-sm font-semibold text-white uppercase">
               Company
             </h3>
-            <ul class="text-white">
-              <li class="mb-4">
-                <a href="#" class="hover:underline">About</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Careers</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Brand Center</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Blog</a>
-              </li>
-            </ul>
           </div>
           <div>
             <h3 class="mb-6 text-sm font-semibold text-white uppercase">
               Download
             </h3>
-            <ul class="text-white">
-              <li class="mb-4">
-                <a href="#" class="hover:underline">iOS</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Android</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Windows</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">MacOS</a>
-              </li>
-            </ul>
           </div>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
@@ -718,8 +657,12 @@
   </div>
 </template>
 
-<script>
-export default {};
-</script>
-
-<style lang="scss" scoped></style>
+<style scoped>
+h2 {
+  margin-bottom: 20px;
+  font-size: 36px;
+}
+p {
+  margin: 20px 0;
+}
+</style>

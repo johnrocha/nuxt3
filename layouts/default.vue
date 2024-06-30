@@ -2,12 +2,12 @@
   <div>
     <header class="fixed w-full">
       <nav
-        class="bg-gradient-to-r from-blue-800 to-pink-600 border-gray-200 py-2.5"
+        class="bg-gradient-to-r from-blue-950 to-blue-800 border-gray-200 py-2.5"
       >
         <div
           class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto"
         >
-          <nuxt-link href="#home" class="flex items-center">
+          <NuxtLink href="#home" class="flex items-center">
             <img
               src="../images/logoiep.png"
               class="h-6 mr-3 sm:h-9"
@@ -17,7 +17,7 @@
               class="self-center text-xl font-semibold whitespace-nowrap text-white"
               >Inspiring</span
             >
-          </nuxt-link>
+          </NuxtLink>
           <div class="flex items-center lg:order-2">
             <!-- <div class="hidden mt-2 mr-4 sm:inline-block">
               <a
@@ -37,7 +37,7 @@
             > -->
             <a
               href="https://github.com/johnrocha"
-              class="text-white bg-green-400 hover:bg-green-300 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 focus:outline-none"
+              class="text-white bg-[#9e1e61] hover:bg-[#ff3f8f] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 focus:outline-none"
               >Contate-nos</a
             >
           </div>
@@ -49,46 +49,47 @@
               class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 text-white"
             >
               <li>
-                <nuxt-link
+                <NuxtLink
                   href="#home"
                   class="block py-2 pl-3 pr-4 text-white rounded lg:bg-transparent lg:p-0 lg:hover:text-green-400"
                   aria-current="page"
-                  >Home</nuxt-link
+                  >Home</NuxtLink
                 >
               </li>
               <li>
-                <nuxt-link
-                  href="#company"
+                <NuxtLink
+                  to="/about"
                   class="block py-2 pl-3 pr-4 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-400 lg:p-0"
-                  >Company</nuxt-link
+                  >Quem Somos</NuxtLink
                 >
               </li>
               <li>
-                <nuxt-link
+                <NuxtLink
                   href="#ceo"
                   class="block py-2 pl-3 pr-4 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-400 lg:p-0"
-                  >CEO</nuxt-link
+                  >Soluções</NuxtLink
                 >
               </li>
               <li>
-                <nuxt-link
+                <NuxtLink
                   href="#feats"
                   class="block py-2 pl-3 pr-4 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-400 lg:p-0"
-                  >Features</nuxt-link
+                  >Cases</NuxtLink
                 >
               </li>
+              <li><NuxtLink to="/products">Blog</NuxtLink></li>
               <!-- <li>
-                <nuxt-link
+                <NuxtLink
                   href="#"
                   class="block py-2 pl-3 pr-4 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-400 lg:p-0"
-                  >Team</nuxt-link
+                  >Team</NuxtLink
                 >
               </li>
               <li>
-                <nuxt-link
+                <NuxtLink
                   href="#"
                   class="block py-2 pl-3 pr-4 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-400 lg:p-0"
-                  >Contact</nuxt-link
+                  >Contact</NuxtLink
                 >
               </li> -->
             </ul>
@@ -98,17 +99,13 @@
     </header>
 
     <div>
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  setup() {
-    return {};
-  },
-};
-</script>
-
-<style lang="scss" scoped></style>
+<style scoped>
+/* .router-link-exact-active {
+  color: #12b488;
+} */
+</style>
