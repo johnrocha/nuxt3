@@ -1,21 +1,32 @@
 <template>
   <div>
-    <div v-if="showIntroScreen" class="fixed inset-0 z-[9999] overflow-hidden bg-white">
-      <ClientOnly>
-        <component
-          :is="'spline-viewer'"
-          :url="splineSceneUrl"
-          background="transparent"
-          class="spline-fullscreen"
+    <div
+      v-if="showIntroScreen"
+      ref="introOverlayRef"
+      class="intro-overlay fixed inset-0 z-[9999] overflow-hidden bg-white"
+    >
+      <div ref="introSceneRef" class="intro-scene-layer">
+        <ClientOnly>
+          <component
+            :is="'spline-viewer'"
+            :url="splineSceneUrl"
+            background="transparent"
+            class="spline-fullscreen"
+          />
+        </ClientOnly>
+
+        <div
+          class="pointer-events-none absolute z-[10000] bg-white"
+          style="bottom: 20px; right: 20px; width: 145px; height: 44px;"
         />
-      </ClientOnly>
+      </div>
+
+      <div ref="introGlowRef" class="intro-glow-layer" aria-hidden="true" />
 
       <div
-        class="pointer-events-none absolute z-[10000] bg-white"
-        style="bottom: 20px; right: 20px; width: 137px; height: 36px;"
-      />
-
-      <div class="relative z-10 container-site flex min-h-screen items-center py-14 pointer-events-none md:py-20 lg:py-24">
+        ref="introContentRef"
+        class="relative z-10 container-site flex min-h-screen items-center py-14 pointer-events-none md:py-20 lg:py-24"
+      >
         <div class="max-w-xl space-y-8 bg-white/0 pointer-events-auto">
           <NuxtLink to="/" class="inline-flex items-center gap-3">
             <img :src="brand.logo" alt="Logo Inspiring" class="h-10 w-auto md:h-12" />
@@ -37,7 +48,8 @@
           <button
             type="button"
             @click="openSite"
-            class="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#2f63ff] to-[#3f84ff] px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-blue-600/30 transition-transform hover:-translate-y-0.5"
+            :disabled="isTransitioning"
+            class="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#2f63ff] to-[#3f84ff] px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-blue-600/30 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-80"
           >
             <span>Comecar o novo</span>
             <span class="text-2xl leading-none">></span>
@@ -46,7 +58,13 @@
       </div>
     </div>
 
-    <template v-else>
+    <div
+      ref="homeShellRef"
+      class="home-shell"
+      :class="{ 'home-shell--covered': showIntroScreen }"
+      :aria-hidden="showIntroScreen ? 'true' : 'false'"
+      :inert="showIntroScreen"
+    >
       <section class="section-spacing bg-slate-50">
         <div class="container-site">
           <div class="mb-8 max-w-3xl space-y-3">
@@ -109,7 +127,7 @@
         description="Ativamos estrategias para IEP, Varfarma e consultoria com foco em conversao, fidelizacao e eficiencia operacional."
         :ctas="primaryCtaLinks"
       />
-    </template>
+    </div>
   </div>
 </template>
 
@@ -133,36 +151,212 @@ const splineSceneBaseUrl = "https://prod.spline.design/oApt2dRFjDZuKMD8/scene.sp
 const splineSceneUrl = ref(splineSceneBaseUrl);
 
 const showIntroScreen = ref(true);
+const isTransitioning = ref(false);
+const prefersReducedMotion = ref(false);
 
-const openSite = () => {
+const introOverlayRef = ref<HTMLElement | null>(null);
+const introSceneRef = ref<HTMLElement | null>(null);
+const introGlowRef = ref<HTMLElement | null>(null);
+const introContentRef = ref<HTMLElement | null>(null);
+const homeShellRef = ref<HTMLElement | null>(null);
+
+let gsapInstance: typeof import("gsap").gsap | null = null;
+let exitTimeline: import("gsap").GSAPTimeline | null = null;
+let introParallaxCleanup: (() => void) | null = null;
+let motionQuery: MediaQueryList | null = null;
+let motionQueryHandler: ((event: MediaQueryListEvent) => void) | null = null;
+
+const ensureGsap = async () => {
+  if (gsapInstance) return gsapInstance;
+
+  try {
+    const { gsap } = await import("gsap");
+    gsapInstance = gsap;
+  } catch {
+    gsapInstance = null;
+  }
+
+  return gsapInstance;
+};
+
+const lockBodyScroll = (locked: boolean) => {
+  if (!import.meta.client) return;
+  document.body.style.overflow = locked ? "hidden" : "";
+};
+
+const clearParallax = () => {
+  introParallaxCleanup?.();
+  introParallaxCleanup = null;
+};
+
+const initParallax = () => {
+  clearParallax();
+
+  if (!import.meta.client || prefersReducedMotion.value || !gsapInstance) {
+    return;
+  }
+
+  const overlay = introOverlayRef.value;
+  const scene = introSceneRef.value;
+  const glow = introGlowRef.value;
+  const content = introContentRef.value;
+
+  if (!overlay || !scene || !glow || !content) {
+    return;
+  }
+
+  const sceneX = gsapInstance.quickTo(scene, "x", { duration: 0.8, ease: "power3.out" });
+  const sceneY = gsapInstance.quickTo(scene, "y", { duration: 0.8, ease: "power3.out" });
+  const glowX = gsapInstance.quickTo(glow, "x", { duration: 0.9, ease: "power3.out" });
+  const glowY = gsapInstance.quickTo(glow, "y", { duration: 0.9, ease: "power3.out" });
+  const contentX = gsapInstance.quickTo(content, "x", { duration: 0.6, ease: "power2.out" });
+  const contentY = gsapInstance.quickTo(content, "y", { duration: 0.6, ease: "power2.out" });
+
+  const onPointerMove = (event: PointerEvent) => {
+    const bounds = overlay.getBoundingClientRect();
+    const relativeX = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const relativeY = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+    sceneX(relativeX * 24);
+    sceneY(relativeY * 16);
+    glowX(relativeX * 42);
+    glowY(relativeY * 32);
+    contentX(relativeX * 14);
+    contentY(relativeY * 18);
+  };
+
+  const reset = () => {
+    sceneX(0);
+    sceneY(0);
+    glowX(0);
+    glowY(0);
+    contentX(0);
+    contentY(0);
+  };
+
+  overlay.addEventListener("pointermove", onPointerMove, { passive: true });
+  overlay.addEventListener("pointerleave", reset);
+
+  introParallaxCleanup = () => {
+    overlay.removeEventListener("pointermove", onPointerMove);
+    overlay.removeEventListener("pointerleave", reset);
+    reset();
+  };
+};
+
+const finalizeIntroExit = () => {
+  clearParallax();
+
+  if (gsapInstance) {
+    gsapInstance.set(
+      [introSceneRef.value, introGlowRef.value, introContentRef.value, homeShellRef.value],
+      {
+        clearProps: "transform,opacity,will-change",
+      },
+    );
+  }
+
   showIntroScreen.value = false;
+  isTransitioning.value = false;
+  lockBodyScroll(false);
+
+  exitTimeline?.kill();
+  exitTimeline = null;
+};
+
+const openSite = async () => {
+  if (isTransitioning.value || !showIntroScreen.value) {
+    return;
+  }
+
+  isTransitioning.value = true;
+  await ensureGsap();
+
+  if (
+    !import.meta.client ||
+    !gsapInstance ||
+    prefersReducedMotion.value ||
+    !introOverlayRef.value ||
+    !introSceneRef.value ||
+    !introGlowRef.value ||
+    !introContentRef.value ||
+    !homeShellRef.value
+  ) {
+    finalizeIntroExit();
+    return;
+  }
+
+  gsapInstance.set(
+    [introSceneRef.value, introGlowRef.value, introContentRef.value, homeShellRef.value],
+    {
+      willChange: "transform,opacity",
+    },
+  );
+  gsapInstance.set(homeShellRef.value, { opacity: 0, y: 72, scale: 0.985 });
+
+  exitTimeline?.kill();
+  exitTimeline = gsapInstance.timeline({
+    defaults: { ease: "power3.inOut" },
+    onComplete: finalizeIntroExit,
+  });
+
+  exitTimeline.to(introSceneRef.value, { duration: 1.9, scale: 1.14, y: -96, opacity: 0.18 }, 0);
+  exitTimeline.to(introGlowRef.value, { duration: 2.1, scale: 1.35, y: -88, opacity: 0 }, 0);
+  exitTimeline.to(introContentRef.value, { duration: 1.55, y: -132, opacity: 0 }, 0.12);
+  exitTimeline.to(introOverlayRef.value, { duration: 1.7, opacity: 0 }, 0.25);
+  exitTimeline.to(homeShellRef.value, { duration: 1.55, y: 0, scale: 1, opacity: 1 }, 0.32);
 };
 
 watch(
   showIntroScreen,
   (isVisible) => {
-    if (!import.meta.client) {
-      return;
-    }
-
-    document.body.style.overflow = isVisible ? "hidden" : "";
+    lockBodyScroll(isVisible);
   },
   { immediate: true },
 );
 
 onBeforeUnmount(() => {
-  if (!import.meta.client) return;
-  document.body.style.overflow = "";
+  lockBodyScroll(false);
+  exitTimeline?.kill();
+  exitTimeline = null;
+  clearParallax();
+
+  if (motionQuery && motionQueryHandler) {
+    motionQuery.removeEventListener("change", motionQueryHandler);
+  }
 });
 
-onMounted(() => {
+onMounted(async () => {
   splineSceneUrl.value = `${splineSceneBaseUrl}?v=${Date.now()}`;
+  await ensureGsap();
 
   if (!customElements.get("spline-viewer")) {
     const script = document.createElement("script");
     script.type = "module";
     script.src = "https://unpkg.com/@splinetool/viewer/build/spline-viewer.js";
     document.head.appendChild(script);
+  }
+
+  motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  prefersReducedMotion.value = motionQuery.matches;
+
+  motionQueryHandler = (event: MediaQueryListEvent) => {
+    prefersReducedMotion.value = event.matches;
+
+    if (event.matches) {
+      clearParallax();
+      return;
+    }
+
+    if (showIntroScreen.value) {
+      initParallax();
+    }
+  };
+
+  motionQuery.addEventListener("change", motionQueryHandler);
+
+  if (showIntroScreen.value && !prefersReducedMotion.value) {
+    initParallax();
   }
 });
 
@@ -176,6 +370,47 @@ const homeCases = computed(() => approvedCases.slice(0, 2));
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.intro-overlay {
+  perspective: 1200px;
+}
+
+.intro-scene-layer {
+  position: absolute;
+  inset: -4%;
+  transform-origin: center;
+}
+
+.intro-glow-layer {
+  position: absolute;
+  inset: -25%;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(63, 132, 255, 0.35), transparent 42%),
+    radial-gradient(circle at 80% 28%, rgba(255, 77, 166, 0.28), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(33, 77, 255, 0.2), transparent 52%);
+}
+
+.home-shell {
+  opacity: 1;
+}
+
+.home-shell--covered {
+  opacity: 0;
+  transform: translateY(72px) scale(0.985);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-glow-layer {
+    opacity: 0.2;
+  }
+
+  .home-shell--covered {
+    transform: none;
+  }
 }
 </style>
 
