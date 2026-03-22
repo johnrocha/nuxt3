@@ -1,12 +1,12 @@
 ﻿<template>
   <section class="card-surface">
-    <h2 class="font-display text-2xl font-bold text-slate-900">Envie sua mensagem</h2>
-    <p class="mt-2 text-sm text-slate-600">
+    <h2 class="font-display text-3xl font-bold text-slate-900">Envie sua mensagem</h2>
+    <p class="mt-3 text-base leading-relaxed text-slate-600">
       Retornamos o contato com o time certo para o assunto selecionado.
     </p>
 
-    <form class="mt-6 grid gap-5" @submit.prevent="submitForm">
-      <div class="grid gap-5 md:grid-cols-2">
+    <form class="mt-8 grid gap-6" @submit.prevent="submitForm">
+      <div class="grid gap-6 md:grid-cols-2">
         <div>
           <label class="label-field" for="nome">Nome*</label>
           <input id="nome" v-model="form.nome" class="input-field" type="text" autocomplete="name" />
@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div class="grid gap-5 md:grid-cols-2">
+      <div class="grid gap-6 md:grid-cols-2">
         <div>
           <label class="label-field" for="telefone">Telefone*</label>
           <input id="telefone" v-model="form.telefone" class="input-field" type="tel" autocomplete="tel" />

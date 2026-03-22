@@ -11,16 +11,16 @@
 
     <section class="section-spacing bg-white">
       <div class="container-site">
-        <div class="grid gap-10 lg:grid-cols-[1.1fr,1fr]">
-          <div class="space-y-4">
+        <div class="grid gap-14 lg:grid-cols-[1.1fr,1fr]">
+          <div class="max-w-3xl space-y-5">
             <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600">Resumo da solução</p>
-            <h2 class="font-display text-3xl font-bold text-slate-900 md:text-4xl">{{ solution.summary }}</h2>
-            <p class="text-base leading-relaxed text-slate-700">{{ solution.description }}</p>
+            <h2 class="font-display text-4xl font-bold leading-tight text-slate-900 md:text-5xl">{{ solution.summary }}</h2>
+            <p class="text-lg leading-relaxed text-slate-700">{{ solution.description }}</p>
           </div>
 
           <div class="card-surface">
             <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-700">Principais capacidades</p>
-            <ul class="mt-4 space-y-3 text-sm text-slate-700">
+            <ul class="mt-5 space-y-4 text-base text-slate-700">
               <li v-for="capability in solution.keyCapabilities" :key="capability" class="flex gap-2">
                 <span class="mt-1 inline-block h-2 w-2 rounded-full bg-brand-500" />
                 <span>{{ capability }}</span>
@@ -33,10 +33,10 @@
 
     <section class="section-spacing bg-slate-100/80">
       <div class="container-site">
-        <div class="grid gap-6 md:grid-cols-3">
+        <div class="grid gap-8 md:grid-cols-3">
           <article v-for="item in solution.highlights" :key="item" class="card-surface">
             <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-700">Destaque</p>
-            <p class="mt-2 text-sm font-medium text-slate-700">{{ item }}</p>
+            <p class="mt-3 text-base font-medium leading-relaxed text-slate-700">{{ item }}</p>
           </article>
         </div>
       </div>

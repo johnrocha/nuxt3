@@ -11,14 +11,14 @@
 
     <section class="section-spacing bg-white">
       <div class="container-site">
-        <div class="mb-8 max-w-3xl space-y-3">
+        <div class="mb-12 max-w-4xl space-y-4">
           <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600">Clientes em destaque</p>
-          <h2 class="font-display text-3xl font-bold text-slate-900 md:text-4xl">
+          <h2 class="font-display text-4xl font-bold leading-tight text-slate-900 md:text-5xl">
             Projetos já validados para publicação
           </h2>
         </div>
 
-        <div class="grid gap-6 md:grid-cols-2">
+        <div class="grid gap-8 md:grid-cols-2">
           <CaseCard v-for="item in approvedCases" :key="item.name" :item="item" />
         </div>
       </div>

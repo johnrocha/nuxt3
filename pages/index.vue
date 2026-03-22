@@ -25,22 +25,22 @@
 
       <div
         ref="introContentRef"
-        class="relative z-10 container-site flex min-h-screen items-center py-14 pointer-events-none md:py-20 lg:py-24"
+        class="relative z-10 container-site flex min-h-screen items-center py-16 pointer-events-none md:py-24 lg:py-28"
       >
-        <div class="max-w-xl space-y-8 bg-white/0 pointer-events-auto">
+        <div class="max-w-2xl space-y-10 bg-white/0 pointer-events-auto">
           <NuxtLink to="/" class="inline-flex items-center gap-3">
             <img :src="brand.logo" alt="Logo Inspiring" class="h-10 w-auto md:h-12" />
             <div>
-              <p class="font-display text-xl font-bold text-brand-950 md:text-2xl">{{ brand.name }}</p>
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">{{ brand.tagline }}</p>
+              <p class="font-display text-2xl font-bold text-brand-950 md:text-3xl">{{ brand.name }}</p>
+              <p class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-600">{{ brand.tagline }}</p>
             </div>
           </NuxtLink>
 
-          <div class="max-w-xl space-y-5">
-            <h1 class="font-display text-4xl font-bold leading-tight text-slate-900 md:text-6xl">
+          <div class="max-w-2xl space-y-6">
+            <h1 class="font-display text-5xl font-bold leading-[1.05] text-slate-900 md:text-7xl">
               Construa um novo Futuro para sua Empresa
             </h1>
-            <p class="text-lg leading-relaxed text-slate-700 md:text-[1.85rem] md:leading-tight">
+            <p class="text-xl leading-relaxed text-slate-700 md:text-[2.1rem] md:leading-snug">
               Integre praticas de IA personalizadas a qualquer um dos seus processos de negocios.
             </p>
           </div>
@@ -49,9 +49,9 @@
             type="button"
             @click="openSite"
             :disabled="isTransitioning"
-            class="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#2f63ff] to-[#3f84ff] px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-blue-600/30 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-80"
+            class="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#2f63ff] to-[#3f84ff] px-10 py-5 text-xl font-semibold text-white shadow-lg shadow-blue-600/30 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-80"
           >
-            <span>Comecar o novo</span>
+            <span>Começar o novo</span>
             <span class="text-2xl leading-none">></span>
           </button>
         </div>
@@ -67,18 +67,18 @@
     >
       <section class="section-spacing bg-slate-50">
         <div class="container-site">
-          <div class="mb-8 max-w-3xl space-y-3">
+          <div class="mb-12 max-w-4xl space-y-4">
             <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600">Valor entregue</p>
-            <h2 class="font-display text-3xl font-bold text-slate-900 md:text-4xl">
+            <h2 class="font-display text-4xl font-bold leading-tight text-slate-900 md:text-5xl">
               Conteudo estrategico para orientar crescimento
             </h2>
           </div>
 
-          <div class="grid gap-6 md:grid-cols-3">
+          <div class="grid gap-8 md:grid-cols-3">
             <article v-for="metric in homeMetrics" :key="metric.label" class="card-surface space-y-3">
               <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-700">{{ metric.label }}</p>
-              <h3 class="font-display text-2xl font-bold text-slate-900">{{ metric.value }}</h3>
-              <p class="text-sm leading-relaxed text-slate-600">{{ metric.helper }}</p>
+              <h3 class="font-display text-3xl font-bold leading-tight text-slate-900 md:text-4xl">{{ metric.value }}</h3>
+              <p class="text-base leading-relaxed text-slate-600">{{ metric.helper }}</p>
             </article>
           </div>
         </div>
@@ -88,17 +88,17 @@
 
       <section class="section-spacing bg-slate-100/70">
         <div class="container-site">
-          <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div class="max-w-3xl space-y-3">
+          <div class="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div class="max-w-4xl space-y-4">
               <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600">Solucoes</p>
-              <h2 class="font-display text-3xl font-bold text-slate-900 md:text-4xl">
+              <h2 class="font-display text-4xl font-bold leading-tight text-slate-900 md:text-5xl">
                 Plataformas e consultoria para cada desafio
               </h2>
             </div>
-            <NuxtLink to="/solucoes" class="btn-outline w-fit">Explorar solucoes</NuxtLink>
+            <NuxtLink to="/solucoes" class="btn-outline w-fit">Explorar soluções</NuxtLink>
           </div>
 
-          <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             <SolutionCard v-for="solution in solutionCards" :key="solution.slug" :solution="solution" />
           </div>
         </div>
@@ -106,17 +106,17 @@
 
       <section class="section-spacing bg-white">
         <div class="container-site">
-          <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div class="max-w-3xl space-y-3">
+          <div class="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div class="max-w-4xl space-y-4">
               <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600">Cases aprovados</p>
-              <h2 class="font-display text-3xl font-bold text-slate-900 md:text-4xl">
+              <h2 class="font-display text-4xl font-bold leading-tight text-slate-900 md:text-5xl">
                 Resultados construidos com grandes marcas
               </h2>
             </div>
             <NuxtLink to="/cases" class="btn-outline w-fit">Ver todos os cases</NuxtLink>
           </div>
 
-          <div class="grid gap-6 md:grid-cols-2">
+          <div class="grid gap-8 md:grid-cols-2">
             <CaseCard v-for="item in homeCases" :key="item.name" :item="item" />
           </div>
         </div>
@@ -149,6 +149,7 @@ useSeoMeta({
 
 const splineSceneBaseUrl = "https://prod.spline.design/oApt2dRFjDZuKMD8/scene.splinecode";
 const splineSceneUrl = ref(splineSceneBaseUrl);
+const introSeenStorageKey = "inspiring_intro_seen_v1";
 
 const showIntroScreen = ref(true);
 const isTransitioning = ref(false);
@@ -161,10 +162,30 @@ const introContentRef = ref<HTMLElement | null>(null);
 const homeShellRef = ref<HTMLElement | null>(null);
 
 let gsapInstance: typeof import("gsap").gsap | null = null;
-let exitTimeline: import("gsap").GSAPTimeline | null = null;
+let exitTimeline: import("gsap").core.Timeline | null = null;
 let introParallaxCleanup: (() => void) | null = null;
 let motionQuery: MediaQueryList | null = null;
 let motionQueryHandler: ((event: MediaQueryListEvent) => void) | null = null;
+
+const hasSeenIntro = () => {
+  if (!import.meta.client) return false;
+
+  try {
+    return window.sessionStorage.getItem(introSeenStorageKey) === "1";
+  } catch {
+    return false;
+  }
+};
+
+const markIntroSeen = () => {
+  if (!import.meta.client) return;
+
+  try {
+    window.sessionStorage.setItem(introSeenStorageKey, "1");
+  } catch {
+    // Silent fail for environments where sessionStorage is unavailable.
+  }
+};
 
 const ensureGsap = async () => {
   if (gsapInstance) return gsapInstance;
@@ -259,6 +280,7 @@ const finalizeIntroExit = () => {
   showIntroScreen.value = false;
   isTransitioning.value = false;
   lockBodyScroll(false);
+  markIntroSeen();
 
   exitTimeline?.kill();
   exitTimeline = null;
@@ -327,14 +349,21 @@ onBeforeUnmount(() => {
 });
 
 onMounted(async () => {
-  splineSceneUrl.value = `${splineSceneBaseUrl}?v=${Date.now()}`;
+  if (hasSeenIntro()) {
+    showIntroScreen.value = false;
+  }
+
   await ensureGsap();
 
-  if (!customElements.get("spline-viewer")) {
-    const script = document.createElement("script");
-    script.type = "module";
-    script.src = "https://unpkg.com/@splinetool/viewer/build/spline-viewer.js";
-    document.head.appendChild(script);
+  if (showIntroScreen.value) {
+    splineSceneUrl.value = `${splineSceneBaseUrl}?v=${Date.now()}`;
+
+    if (!customElements.get("spline-viewer")) {
+      const script = document.createElement("script");
+      script.type = "module";
+      script.src = "https://unpkg.com/@splinetool/viewer/build/spline-viewer.js";
+      document.head.appendChild(script);
+    }
   }
 
   motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");

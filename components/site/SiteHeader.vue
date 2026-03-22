@@ -1,11 +1,11 @@
 ﻿<template>
   <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
     <div class="container-site">
-      <div class="flex h-20 items-center justify-between gap-6">
+      <div class="flex h-24 items-center justify-between gap-8">
         <NuxtLink class="flex items-center gap-3" to="/">
-          <img :src="brand.logo" alt="Logo Inspiring" class="h-10 w-auto" />
+          <img :src="brand.logo" alt="Logo Inspiring" class="h-11 w-auto" />
           <div>
-            <p class="font-display text-xl font-bold text-brand-950">{{ brand.name }}</p>
+            <p class="font-display text-2xl font-bold text-brand-950">{{ brand.name }}</p>
             <p class="text-xs font-medium uppercase tracking-[0.18em] text-brand-500">
               {{ brand.tagline }}
             </p>
@@ -25,12 +25,12 @@
           </svg>
         </button>
 
-        <nav class="hidden items-center gap-8 md:flex" aria-label="Navegação principal">
+        <nav class="hidden items-center gap-9 md:flex" aria-label="Navegação principal">
           <NuxtLink
             v-for="item in navigationItems"
             :key="item.to"
             :to="item.to"
-            class="text-sm font-semibold transition-colors"
+            class="text-base font-semibold transition-colors"
             :class="isActive(item.to) ? 'text-brand-700' : 'text-slate-600 hover:text-brand-600'"
           >
             {{ item.label }}
