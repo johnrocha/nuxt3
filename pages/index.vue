@@ -86,7 +86,7 @@
 
       <FeatureHighlights :items="homeHighlights" />
 
-      <section class="section-spacing bg-slate-100/70">
+      <!-- <section class="section-spacing bg-slate-100/70">
         <div class="container-site">
           <div class="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div class="max-w-4xl space-y-4">
@@ -120,7 +120,7 @@
             <CaseCard v-for="item in homeCases" :key="item.name" :item="item" />
           </div>
         </div>
-      </section>
+      </section> -->
 
       <CallToActionStrip
         title="Escolha o proximo avanco da sua operacao"
