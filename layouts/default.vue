@@ -1,7 +1,7 @@
 ﻿<template>
-  <div class="min-h-screen bg-slate-50 text-slate-900">
+  <div class="flex min-h-screen flex-col bg-slate-50 text-slate-900">
     <SiteHeader />
-    <main>
+    <main class="flex-1">
       <slot />
     </main>
     <SiteFooter />

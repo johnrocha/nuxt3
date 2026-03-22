@@ -29,7 +29,7 @@ export const navigationItems: NavItem[] = [
   { label: "Home", to: "/" },
   { label: "Quem Somos", to: "/quem-somos" },
   { label: "Soluções", to: "/solucoes" },
-  { label: "Cases", to: "/cases" },
+  // { label: "Cases", to: "/cases" },
   { label: "Contato", to: "/contato" },
 ];
 
