@@ -38,7 +38,7 @@ export const seoByRoute: Record<
   SeoContent
 > = {
   home: {
-    title: "Inspiring | Tecnologia, dados e crescimento orientado a resultado",
+    title: "Inspiring",
     description:
       "A Inspiring conecta estratégia, tecnologia e dados para acelerar performance com orquestração em tempo real e ofertas inteligentes.",
   },
