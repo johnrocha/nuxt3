@@ -3,7 +3,7 @@
     <div
       v-if="showIntroScreen"
       ref="introOverlayRef"
-      class="intro-overlay fixed inset-0 z-[9999] overflow-hidden bg-white"
+      class="intro-overlay fixed inset-0 z-[9999] bg-white"
     >
       <div ref="introSceneRef" class="intro-scene-layer">
         <ClientOnly>
@@ -25,9 +25,9 @@
 
       <div
         ref="introContentRef"
-        class="relative z-10 container-site flex min-h-screen items-center py-16 pointer-events-none md:py-24 lg:py-28"
+        class="intro-content relative z-10 container-site flex min-h-[100svh] items-center py-10 pointer-events-none md:py-14 lg:py-20"
       >
-        <div class="max-w-2xl space-y-10 bg-white/0 pointer-events-auto">
+        <div class="intro-copy max-w-2xl space-y-10 bg-white/0 pointer-events-auto">
           <NuxtLink to="/" class="inline-flex items-center gap-3">
             <img :src="brand.logo" alt="Logo Inspiring" class="h-10 w-auto md:h-12" />
             <div>
@@ -36,11 +36,11 @@
             </div>
           </NuxtLink>
 
-          <div class="max-w-2xl space-y-6">
-            <h1 class="font-display text-5xl font-bold leading-[1.05] text-slate-900 md:text-7xl">
+          <div class="intro-heading max-w-2xl space-y-6">
+            <h1 class="intro-title font-display text-5xl font-bold leading-[1.05] text-slate-900 md:text-6xl xl:text-7xl">
               Construa um novo Futuro para sua Empresa
             </h1>
-            <p class="text-xl leading-relaxed text-slate-700 md:text-[2.1rem] md:leading-snug">
+            <p class="intro-description text-xl leading-relaxed text-slate-700 md:text-2xl md:leading-snug xl:text-[2.1rem]">
               Integre praticas de IA personalizadas a qualquer um dos seus processos de negocios.
             </p>
           </div>
@@ -49,7 +49,7 @@
             type="button"
             @click="openSite"
             :disabled="isTransitioning"
-            class="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#2f63ff] to-[#3f84ff] px-10 py-5 text-xl font-semibold text-white shadow-lg shadow-blue-600/30 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-80"
+            class="intro-cta inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#2f63ff] to-[#3f84ff] px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-blue-600/30 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-80 md:px-9 md:py-4 md:text-xl xl:px-10 xl:py-5"
           >
             <span>Começar o novo</span>
             <span class="text-2xl leading-none">></span>
@@ -403,6 +403,8 @@ const homeCases = computed(() => approvedCases.slice(0, 2));
 
 .intro-overlay {
   perspective: 1200px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .intro-scene-layer {
@@ -430,6 +432,63 @@ const homeCases = computed(() => approvedCases.slice(0, 2));
 .home-shell--covered {
   opacity: 0;
   transform: translateY(72px) scale(0.985);
+}
+
+@media (max-width: 1200px) {
+  .intro-copy {
+    max-width: min(36rem, 58vw);
+  }
+
+  .intro-scene-layer {
+    inset: -2% -18% -8% 32%;
+  }
+
+  .intro-glow-layer {
+    inset: -18% -12% -18% 20%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .intro-scene-layer {
+    inset: 2% -26% -8% 40%;
+    opacity: 0.9;
+  }
+
+  .intro-glow-layer {
+    inset: -14% -16% -16% 28%;
+    opacity: 0.82;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 768px) {
+  .intro-content {
+    align-items: flex-start;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .intro-copy > * + * {
+    margin-top: 1.5rem !important;
+  }
+
+  .intro-heading > * + * {
+    margin-top: 0.9rem !important;
+  }
+
+  .intro-title {
+    font-size: clamp(3rem, 6.2vw, 4.6rem);
+  }
+
+  .intro-description {
+    max-width: 28ch;
+    font-size: clamp(1.55rem, 2.25vw, 2rem);
+    line-height: 1.22;
+  }
+
+  .intro-cta {
+    padding: 0.85rem 1.9rem;
+    font-size: 1.3rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
